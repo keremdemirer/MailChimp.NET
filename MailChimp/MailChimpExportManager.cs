@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
+using ServiceStack;
 using ServiceStack.Text;
 using MailChimp.Errors;
 using MailChimp.Campaigns;
@@ -108,25 +108,25 @@ namespace MailChimp
 			foreach (string row in listofmembers)
 			{
 				if (row.Length > 4)
-                    iListofMembers.Add(row.Trim(new[] { '[', ']' }));
+					iListofMembers.Add(row.Trim(new[] { '[', ']' }));
 			}
 
-            string[] keys = iListofMembers[0].Split(new[] { ',' });
+			string[] keys = iListofMembers[0].Split(new[] { ',' });
 			List<string> iKeys = new List<string>();
 			foreach (string row in keys)
 			{
-                string final_row = JsonSerializer.DeserializeFromString<string>(row.Trim(new[] { '"' }));   // This is to fix unicode characters
-                iKeys.Add(final_row);
+				string final_row = JsonSerializer.DeserializeFromString<string>(row.Trim(new[] { '"' }));   // This is to fix unicode characters
+				iKeys.Add(final_row);
 			}
 
 			for (int i = 1; i < iListofMembers.Count; i++)
 			{
-                string[] values = iListofMembers[i].Split(new[] { ',' });
+				string[] values = iListofMembers[i].Split(new[] { ',' });
 				List<string> iValues = new List<string>();
 				foreach (string row in values)
 				{
-                    string final_row = JsonSerializer.DeserializeFromString<string>(row.Trim(new[] { '"' }));   // This is to fix unicode characters
-                    iValues.Add(final_row);
+					string final_row = JsonSerializer.DeserializeFromString<string>(row.Trim(new[] { '"' }));   // This is to fix unicode characters
+					iValues.Add(final_row);
 				}
 
 				Dictionary<string, string> contact = new Dictionary<string, string>();
@@ -165,9 +165,10 @@ namespace MailChimp
 
 			try
 			{
-                //  Call the API with the passed arguments:
-                var resultString = fullUrl.PostJsonToUrl(args);
-                returnList = ParseExportApiResults(resultString);
+				//  Call the API with the passed arguments:
+
+				var resultString = fullUrl.PostJsonToUrl(args);
+				returnList = ParseExportApiResults(resultString);
 			}
 			catch (Exception ex)
 			{
