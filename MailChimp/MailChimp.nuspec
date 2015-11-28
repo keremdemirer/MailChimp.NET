@@ -16,10 +16,7 @@
         <language>en-US</language>
         <tags>mailchimp email</tags>
         <dependencies>
-            <dependency id="ServiceStack.Text" version="[3.9.71]" />
+            <dependency id="ServiceStack.Text" version="[4.0.33]" />
         </dependencies>
     </metadata>
-    <files>
-        <file src=".\bin\Release\MailChimp.dll" target="lib\net40\MailChimp.dll" />
-    </files>
 </package>
